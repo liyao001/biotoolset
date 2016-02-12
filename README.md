@@ -1,2 +1,2 @@
 # BioToolset
->This is a toolset of bioinformatics
+This is a toolset for bioinformatics
