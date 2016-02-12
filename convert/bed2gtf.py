@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Copyright (C) 2016  Yao Li
+# Convert bed file to gtf file, provide special support for bed files downloads from UCSC HgTables
+#
+# How to use:
+# $ python bed2gtf.py -i bedFiles -o gtfFile -s refGene_hg38 -f 3UTR -u 1 -m map
 
 import getopt, sys, os.path
 
