@@ -55,4 +55,4 @@ if __name__ == '__main__':
     fl = getNormalizedFileList(data)
     gene = raw_input("Gene symbol: ")
     store = raw_input("Path for storing the result: ")
-    getGeneExpression(fl, 'YY1\|', store)
+    getGeneExpression(fl, gene, store)
