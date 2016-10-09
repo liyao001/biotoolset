@@ -1,4 +1,4 @@
-simiheat <- function(..., saveTo, tags, startColor = 'white', endColor = 'black', ang = 90, format = 'pdf', jaccard = TRUE, width = 8, height = 8){
+simiheat <- function(..., saveTo, tags, startColor = 'white', endColor = 'black', ang = 90, format = 'pdf', jaccard = TRUE, width = 8, height = 8, blSize = .2, blColor = NULL){
   library('ggplot2')
   dots <- list(...)
   cols = length(dots)
@@ -38,7 +38,11 @@ simiheat <- function(..., saveTo, tags, startColor = 'white', endColor = 'black'
   
   #create heatmap
   draftPlot <- ggplot(df, aes(x, y))
-  draftPlot <- draftPlot+geom_tile(aes(fill=rInterset))+labs(x=NULL, y=NULL)+scale_y_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_x_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_fill_gradientn(limits=c(0, 1), colours=c(startColor, endColor))+theme_linedraw()+theme(axis.text.x=element_text(angle = ang, hjust = hj, vjust = vj))+guides(fill = guide_legend(title = NULL))
+  if (is.null(blColor)){
+    draftPlot <- draftPlot+geom_tile(aes(fill=rInterset))+labs(x=NULL, y=NULL)+scale_y_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_x_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_fill_gradientn(limits=c(0, 1), colours=c(startColor, endColor))+theme_linedraw()+theme(axis.text.x=element_text(angle = ang, hjust = hj, vjust = vj))+guides(fill = guide_legend(title = NULL))+theme(panel.grid.major = element_line(size = 2))
+  }else{
+    draftPlot <- draftPlot+geom_tile(aes(fill=rInterset), size = blSize, color=blColor)+labs(x=NULL, y=NULL)+scale_y_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_x_continuous(expand=c(0, 0), breaks = bs, labels=tags)+scale_fill_gradientn(limits=c(0, 1), colours=c(startColor, endColor))+theme_linedraw()+theme(axis.text.x=element_text(angle = ang, hjust = hj, vjust = vj))+guides(fill = guide_legend(title = NULL))+theme(panel.grid.major = element_line(size = 2))
+  }
   #save plot
   ggsave(saveTo, draftPlot, device = format, width = width, height = height)
 }
